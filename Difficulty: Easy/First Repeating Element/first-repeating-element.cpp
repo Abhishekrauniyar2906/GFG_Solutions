@@ -12,14 +12,13 @@ class Solution {
   public:
     // Function to return the position of the first repeating element.
     int firstRepeated(vector<int> &arr) {
-      unordered_map<int,int>hash;
-      for(int i = 0; i < arr.size(); i++){
-          hash[arr[i]]++;
-      }
+    unordered_map<int,int>mp;
       
+      for(auto a:arr){
+          mp[a]++;
+      }
       for(int i = 0; i < arr.size(); i++){
-          
-          if(hash[arr[i]] > 1){
+          if(mp[arr[i]] > 1){
               return i + 1;
           }
       }
