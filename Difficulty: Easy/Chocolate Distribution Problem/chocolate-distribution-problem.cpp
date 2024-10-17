@@ -6,8 +6,8 @@ using namespace std;
 class Solution{
     public:
     long long findMinDiff(vector<long long> a, long long n, long long m){
-        
-         sort(a.begin(), a.end());
+    //code
+    sort(a.begin(), a.end());
      int i = 0;
      int j = i + m - 1;
     
@@ -21,7 +21,6 @@ class Solution{
          j++;
      }
      return mini;
-    
     }   
 };
 
