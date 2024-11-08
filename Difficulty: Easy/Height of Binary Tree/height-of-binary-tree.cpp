@@ -100,7 +100,7 @@ class Solution{
     public:
     //Function to find the height of a binary tree.
     int height(struct Node* node){
-       if(!node){
+         if(!node){
            return 0;
        }
        int leftHeight = height(node -> left);
@@ -121,7 +121,9 @@ int main()
 		Node* root = buildTree(treeString);
         Solution ob;
 		cout<<ob.height(root)<<endl;
-    }
+    
+cout << "~" << "\n";
+}
     return 0;
 }
 // } Driver Code Ends
