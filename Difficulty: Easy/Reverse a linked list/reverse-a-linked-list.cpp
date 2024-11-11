@@ -41,17 +41,23 @@ class Solution {
   public:
     // Function to reverse a linked list.
     struct Node* reverseList(struct Node* head) {
-       Node *prev = nullptr;
-        Node *curr = head;
+        // code here
+        // return head of reversed list
+        
+        Node* prev = NULL;
+        Node* curr = head;
+        Node* NextNode = curr -> next;
+        
         while(curr != NULL){
-            Node* nxt = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = nxt;
+             Node* NextNode = curr -> next;
+             curr -> next = prev;
+             
+             prev = curr;
+             curr = NextNode;
         }
+        
         return prev;
-    
-    }
+            }
 };
 
 
@@ -100,6 +106,7 @@ int main() {
 
         printList(head);
         cout << endl;
+        cout << "~" << endl;
     }
     return 0;
 }
