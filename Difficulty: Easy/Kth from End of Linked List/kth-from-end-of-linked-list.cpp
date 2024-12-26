@@ -36,30 +36,23 @@ void printList(Node* node) {
 class Solution {
   public:
   
-  int getLength(Node* head){
-      int count = 0;
-      Node* temp= head;
-      while(temp != NULL){
-          count++;
-          temp = temp -> next;
+  void kthNode(Node* head, int &k, int &ans){
+      if(head ==0){
+          return;
       }
-      return count;
+      
+      kthNode(head -> next, k, ans);
+      if(k == 1){
+          ans = head -> data;
+      }
+      
+      k--;
   }
     int getKthFromLast(Node *head, int k) {
-      int length = getLength(head);
-      
-      int pos = abs(length - k);
-      if(k > length || k <= 0){
-          return -1;
-      }
-      Node* temp = head;
-      while(pos  > 0){
-          temp = temp -> next;
-         pos--;
-      }
-      
-     
-      return temp -> data;
+        int ans = -1;
+        
+        kthNode(head, k, ans);
+        return ans;
     }
 };
 
