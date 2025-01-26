@@ -8,9 +8,8 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    // Function to find largest rectangular area possible in a given histogram.
-    
-    
+ 
+
    vector<int> nextsmallerElement(vector<int> &heights){
     stack<int> st;
     st.push(-1);
@@ -49,7 +48,7 @@ class Solution {
    }
 
 
-    int getMaxArea(vector<int>& heights) {
+     int getMaxArea(vector<int>& heights) {
         vector<int> leftans = prevsmallerElement(heights);
           
         vector<int> rightans = nextsmallerElement(heights);
@@ -74,6 +73,9 @@ class Solution {
            return maxi;
     }
 };
+
+
+  
 
 
 //{ Driver Code Starts.
