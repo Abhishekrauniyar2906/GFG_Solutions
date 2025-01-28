@@ -4,27 +4,28 @@ using namespace std;
 
 
 // } Driver Code Ends
-
 class Solution {
   public:
   
-  void permutation(string &s, int i, set<string> &unique){
-      if(i >= s.length()){
-         unique.insert(s);
-          return;
-      }
-      for(int j = i; j < s.length(); j++){
-          swap(s[i], s[j]);
-          permutation(s, i + 1, unique);
-              swap(s[i], s[j]);
-      }
-  }
+    void permutations(string &s, int i, set<string> &unique){
+        if(i >= s.length()){
+            unique.insert(s);
+            return;
+        }
+        
+        for(int j = i; j < s.length(); j++){
+            swap(s[i], s[j]);
+            permutations(s, i + 1, unique);
+            swap(s[i], s[j]);
+        }
+    }
     vector<string> findPermutation(string &s) {
         set<string>unique;
-        permutation(s, 0, unique);
+        permutations(s, 0, unique);
         
         vector<string>ans(unique.begin(), unique.end());
         return ans;
+        
     }
 };
 
