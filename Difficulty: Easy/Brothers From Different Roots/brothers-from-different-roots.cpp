@@ -87,60 +87,52 @@ Node* buildTree(string str)
 
 class Solution {
   public:
-  
-  void inorder1(Node* root1, vector<int> &ans1){
-      if(!root1){
-          return;
-      }
-      
-      inorder1(root1 -> left, ans1);
-      
-      ans1.push_back(root1 -> data);
-      
-      inorder1(root1 -> right, ans1);
-      
-  }
-  
-   void inorder2(Node* root2, vector<int> &ans2){
-    if(!root2){
-          return;
-      }
-      
-      
-       inorder2(root2 -> right, ans2);  
-       
-      ans2.push_back(root2 -> data);
-      
-      inorder2(root2 -> left, ans2);
-      
-   }
     int countPairs(Node* root1, Node* root2, int x) {
-         
-      vector<int> ans1;
-      vector<int>ans2;
-      
-      inorder1(root1, ans1);
-      inorder2(root2, ans2);
-       int i = 0;
-       int sum = 0;
-        int result = 0;
-        int j = 0;
-      while(i < ans1.size() && j < ans2.size()){
-          int sum = ans1[i] + ans2[j];
-          
-          if(sum == x){
-              result++;
-              i++;
-              j++;
-          }
-          else if(sum < x){
-              i++;
-          }
-          else{ // sum > x
-              j++;
-          }
-      }
-      return result;
+        
+        int ans = 0;
+        stack<Node*>s1,s2;
+        
+        Node* a = root1;
+        Node* b = root2;
+        
+        while(1){
+            while(a){
+                s1.push(a);
+                a = a -> left;
+            }
+            
+            while(b){
+                s2.push(b);
+                b = b -> right;
+            }
+            
+            if(s1.empty() || s2.empty()){
+                break;
+            }
+            
+            auto atop = s1.top();
+            auto btop = s2.top();
+            
+            int sum = atop -> data + btop -> data;
+            
+            if(sum == x){
+                ++ans;
+                s1.pop();
+                s2.pop();
+                a = atop -> right;
+                b = btop -> left;
+            }
+            else if(sum < x){
+                s1.pop();
+                a = atop -> right;
+            }
+            else{
+                s2.pop();
+                b = btop -> left;
+            }
+        }
+        
+        return ans;
     }
 };
 
