@@ -5,6 +5,7 @@ using namespace std;
 
 // } Driver Code Ends
 
+
 class Info{
     public:
     int data;
@@ -77,6 +78,8 @@ class Solution {
         
     }
 };
+
+
 
 
 //{ Driver Code Starts.
