@@ -4,7 +4,7 @@ class Solution {
    int solve(int W, vector<int> &val, vector<int> &wt, int n, vector<vector<int>> &dp){
       
       for(int i = 1; i <= n; i++){
-          for(int w = 0; w <= W; w++){
+          for(int w = 1; w <= W; w++){
               if(wt[i - 1] <= w){
                 dp[i][w] = max(val[i - 1] + dp[i - 1][w - wt[i - 1]], dp[i - 1][w]);  
               }
