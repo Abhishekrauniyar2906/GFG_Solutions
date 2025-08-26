@@ -1,31 +1,31 @@
-/* A binary tree node
-struct Node
-{
-    int data;
-    Node* left, * right;
-}; */
 
 class Solution {
   public:
-    vector<int> diagonal(Node *root) {
-        vector<int>ans;
-        if(!root) return ans;
-        queue<Node*>q;
-        q.push(root);
+  
+    void solve(Node* root, int D, map<int, vector<int>> &mp){
+        if(!root)return;
         
-        while(!q.empty()){
-            Node* temp = q.front();
-            q.pop();
-            
-            while(temp){
-                ans.push_back(temp -> data);
-                
-                if(temp -> left != NULL){
-                    q.push(temp -> left);
-                }
-                temp = temp -> right;
-            }
+        mp[D].push_back(root -> data);
+        
+        solve(root -> left, D + 1, mp);
+        solve(root -> right, D, mp);
+    }
+    vector<int> diagonal(Node *root) {
+        // code here
+        vector<int>ans;
+        
+        map<int, vector<int>> mp;
+        
+        solve(root, 0, mp);
+        
+        for(auto i : mp){
+            for(auto value : i.second)
+            ans.push_back(value);
         }
+        
         return ans;
+        
+        
+        
     }
 };
