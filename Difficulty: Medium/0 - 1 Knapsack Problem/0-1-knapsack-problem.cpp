@@ -1,28 +1,32 @@
 class Solution {
   public:
-   
-   int solve(int W, vector<int> &val, vector<int> &wt, int n, vector<vector<int>> &dp){
-      
-      for(int i = 1; i <= n; i++){
-          for(int w = 1; w <= W; w++){
-              if(wt[i - 1] <= w){
-                dp[i][w] = max(val[i - 1] + dp[i - 1][w - wt[i - 1]], dp[i - 1][w]);  
-              }
-              else{
-                  dp[i][w] = dp[i - 1][w];
-              }
-          }
-      }
-       return dp[n][W];
-       
-   }
-    int knapsack(int W, vector<int> &val, vector<int> &wt) {
+  
+    int solve(int capacity, vector<int> &val, vector<int>& wt,  vector<vector<int>> &dp, int n){
+        if(n == 0 || capacity == 0){
+            return 0;
+        }
+        
+        if(dp[n][capacity] != -1){
+            return dp[n][capacity];
+        }
+        
+        int ans;
+        if(wt[n - 1] <= capacity){
+            int pick = val[n - 1] + solve(capacity - wt[n - 1], val, wt, dp, n - 1);
+            int notpick = solve(capacity, val, wt, dp, n - 1);
+            ans = max(pick, notpick);
+            
+        }
+        else{
+            ans = solve(capacity, val, wt, dp, n - 1);
+        }
+        return dp[n][capacity] = ans;
+    }
+    int knapsack(int capacity, vector<int> &val, vector<int> &wt) {
         int n = wt.size();
-        vector<vector<int>>dp(n + 1, vector<int>(W + 1, 0));
+        vector<vector<int>>dp(n + 1, vector<int>(capacity + 1, -1));
         
-        int ans = solve(W, val, wt, n, dp);
-        
-        return ans;
+        return solve(capacity, val, wt, dp, n);
         
     }
 };
