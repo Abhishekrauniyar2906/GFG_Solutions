@@ -1,25 +1,31 @@
 class Solution {
   public:
-    int longestSubarray(vector<int>& arr, int k) {
-        int maxLen = 0;
+    int longestSubarray(vector<int>& nums, int k) {
+        // code here
+        int longest = INT_MIN;
         
-        int preFixSum = 0;
         unordered_map<int,int>mp;
-        for(int i = 0; i < arr.size(); i++){
-            preFixSum += arr[i];
+        // mp[0] = 1;
+        int csum = 0;
+        
+        int ans = 0;
+        
+        
+        for(int i = 0; i < nums.size(); i++){
+            csum += nums[i];
             
-            if(preFixSum == k){
-                maxLen = i + 1;
+            if(csum == k){
+              longest = i + 1;
             }
             
-            if(mp.find(preFixSum - k) != mp.end()){
-                maxLen = max(maxLen,  i - mp[preFixSum - k]);
+            if(mp.find(csum - k) != mp.end()){
+               longest = max(longest, i - mp[csum - k]);
             }
             
-            if(mp.find(preFixSum) == mp.end()){
-                mp[preFixSum] = i;
+            if(mp.find(csum) == mp.end()){
+              mp[csum] = i;
             }
         }
-        return maxLen;
+        return longest == INT_MIN ? 0 : longest;
     }
 };
