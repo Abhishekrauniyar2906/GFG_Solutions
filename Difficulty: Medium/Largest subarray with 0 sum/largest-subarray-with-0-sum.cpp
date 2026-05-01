@@ -1,26 +1,31 @@
 class Solution {
   public:
-    int maxLength(vector<int>& arr) {
+    int maxLength(vector<int>& nums) {
+        // code here
+         int longest = INT_MIN;
         
-           int maxLen = 0;
-        
-        int preFixSum = 0;
         unordered_map<int,int>mp;
-        for(int i = 0; i < arr.size(); i++){
-            preFixSum += arr[i];
+        // mp[0] = 1;
+        int csum = 0;
+        
+        int ans = 0;
+        
+        
+        for(int i = 0; i < nums.size(); i++){
+            csum += nums[i];
             
-            if(preFixSum == 0){
-                maxLen = i + 1;
+            if(csum == 0){
+              longest = i + 1;
             }
             
-            if(mp.find(preFixSum) != mp.end()){
-                maxLen = max(maxLen,  i - mp[preFixSum]);
+            if(mp.find(csum) != mp.end()){
+               longest = max(longest, i - mp[csum]);
             }
             
-            if(mp.find(preFixSum) == mp.end()){
-                mp[preFixSum] = i;
+            if(mp.find(csum) == mp.end()){
+              mp[csum] = i;
             }
         }
-        return maxLen;
+        return longest == INT_MIN ? 0 : longest;
     }
 };
