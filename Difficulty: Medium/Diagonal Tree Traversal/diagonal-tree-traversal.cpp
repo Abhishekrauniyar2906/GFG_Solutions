@@ -1,31 +1,28 @@
 
 class Solution {
   public:
-  
-    void solve(Node* root, int D, map<int, vector<int>> &mp){
-        if(!root)return;
-        
-        mp[D].push_back(root -> data);
-        
-        solve(root -> left, D + 1, mp);
-        solve(root -> right, D, mp);
-    }
     vector<int> diagonal(Node *root) {
         // code here
-        vector<int>ans;
+          vector<int>ans;
+        if(!root) return ans;
+      
         
-        map<int, vector<int>> mp;
+        queue<Node*>q;
+        q.push(root);
         
-        solve(root, 0, mp);
-        
-        for(auto i : mp){
-            for(auto value : i.second)
-            ans.push_back(value);
+        while(!q.empty()){
+            Node* frontNode = q.front();
+            q.pop();
+            while(frontNode != NULL){
+                
+                if(frontNode -> left){
+                    q.push(frontNode -> left);
+                }
+                
+                ans.push_back(frontNode -> data);
+                frontNode = frontNode -> right;
+            }
         }
-        
         return ans;
-        
-        
-        
     }
 };
