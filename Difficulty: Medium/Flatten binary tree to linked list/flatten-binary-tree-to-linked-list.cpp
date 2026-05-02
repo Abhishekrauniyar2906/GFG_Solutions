@@ -3,24 +3,26 @@
 class Solution {
   public:
     void flatten(Node *root) {
-     
-     Node* curr = root;
-     
-     while(curr != NULL){
+        // code here
+        Node* curr = root;
         
-        if(curr -> left){
+        while(curr != NULL){
+            if(curr -> left != NULL){
             Node* pred = curr -> left;
             
             while(pred -> right != NULL){
                 pred = pred -> right;
             }
             
-            pred -> right = curr -> right;
+            Node* joinNode = curr -> right;
+            
             curr -> right = curr -> left;
+           
             curr -> left = NULL;
+            pred -> right = joinNode;
+            
         }
         curr = curr -> right;
-     }
-        
+        }
     }
 };
