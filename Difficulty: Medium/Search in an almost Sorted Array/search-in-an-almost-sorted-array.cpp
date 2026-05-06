@@ -2,31 +2,29 @@
 class Solution {
   public:
     int findTarget(vector<int>& arr, int target) {
-        int n = arr.size();
+        // code here
         int s = 0;
         int e = arr.size() - 1;
-    
+        
         while(s <= e){
             int mid = s + (e - s) / 2;
             
-            if(mid - 1 >= 0 && arr[mid - 1] == target){
+            if(arr[mid - 1] == target){
                 return mid - 1;
-            }
-            
-            if(mid + 1 < n && arr[mid + 1] == target){
-                return mid + 1;
             }
             
             if(arr[mid] == target){
                 return mid;
             }
             
+            if(arr[mid + 1] == target){
+                return mid + 1;
+            }
             else if(arr[mid] < target){
-              
-                s = mid + 2;
+              s = mid + 1;
             }
             else{
-                e = mid - 2;
+                e = mid - 1;
             }
         }
         return -1;
