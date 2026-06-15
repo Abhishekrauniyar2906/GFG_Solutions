@@ -3,12 +3,11 @@ class Solution {
     void pushZerosToEnd(vector<int>& arr) {
         // code here
         int left = 0;
-        for(int right = 0; right < arr.size(); right++){
-            if(arr[right] != 0){
-                swap(arr[right], arr[left]);
+        for(int i = 0; i < arr.size(); i++){
+            if(arr[i] != 0){
+                swap(arr[i], arr[left]);
                 left++;
             }
         }
-        
     }
 };
