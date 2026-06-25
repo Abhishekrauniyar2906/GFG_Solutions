@@ -1,5 +1,3 @@
-// User function Template for C++
-
 class Solution {
   public:
     void flatten(Node *root) {
@@ -7,22 +5,20 @@ class Solution {
         Node* curr = root;
         
         while(curr != NULL){
-            if(curr -> left != NULL){
-            Node* pred = curr -> left;
             
-            while(pred -> right != NULL){
-                pred = pred -> right;
+            if(curr -> left){
+                Node* pred = curr -> left;
+                
+                while(pred -> right != NULL){
+                    pred = pred -> right;
+                }
+                
+                pred -> right = curr -> right;
+                curr -> right = curr -> left;
+                curr -> left = NULL;
+                
             }
-            
-            Node* joinNode = curr -> right;
-            
-            curr -> right = curr -> left;
-           
-            curr -> left = NULL;
-            pred -> right = joinNode;
-            
-        }
-        curr = curr -> right;
+            curr = curr -> right;
         }
     }
 };
