@@ -1,23 +1,13 @@
-// User function template for C++
-
 class Solution {
   public:
-    // Function to find length of shortest common supersequence of two strings.
-    int shortestCommonSupersequence(string &s1, string &s2) {
-        int n = s1.size();
-        int m = s2.size();
+    
+    int solve(string &a, string &b){
+           int n = a.size(), m = b.size();
         vector<vector<int>>dp(n + 1, vector<int>(m + 1, 0));
-        // for(int i = 0; i <= n; i++){
-        //     for(int j = 0; j <= m; j++){
-        //         if(i == 0 || j == 0){
-        //             dp[i][j] = 0;
-        //         }
-        //     }
-        // }
         
         for(int i = 1; i <= n; i++){
             for(int j = 1; j <= m; j++){
-                if(s1[i - 1] == s2[j - 1]){
+                if(a[i - 1] == b[j - 1]){
                     dp[i][j] = 1 + dp[i - 1][j - 1];
                 }
                 else{
@@ -25,6 +15,13 @@ class Solution {
                 }
             }
         }
-        return (m + n) - dp[n][m];
+        return dp[n][m];
+        
+    }
+    int minSuperSeq(string &a, string &b) {
+        int n = a.size(), m = b.size();
+        int ans = solve(a, b);
+        return m + n - ans;
+        
     }
 };
