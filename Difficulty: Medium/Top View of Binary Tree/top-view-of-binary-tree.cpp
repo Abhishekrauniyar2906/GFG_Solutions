@@ -1,45 +1,35 @@
-
 class Solution {
   public:
-   
-   vector<int> solve(Node* root, vector<int>&ans){
-              
-       vector<int>result;
-       if(root == NULL)return result;
-       map<int,int>levelDistance;
-       queue<pair<Node*, int>>q;
-       q.push(make_pair(root, 0));
-
-      
-       while(!q.empty()){
-          pair<Node*,int> temp = q.front();
-           q.pop();
-           
-           Node* frontNode = temp.first;
-           int topViewAns = temp.second;
-           
-           if(levelDistance.find(topViewAns) == levelDistance.end()){
-               levelDistance[topViewAns] = frontNode -> data;
-           }
-           
-           if(frontNode -> left != NULL){
-               q.push(make_pair(frontNode -> left, topViewAns - 1));
-           }
-           
-           if(frontNode -> right != NULL){
-               q.push(make_pair(frontNode -> right, topViewAns + 1));
-           }
-           
-       }
-       
-       for(auto it : levelDistance){
-          result.push_back(it.second);
-       }
-       return result;
-   }
     vector<int> topView(Node *root) {
-     vector<int>ans;
-     return solve(root, ans);
-     
+        // code her
+        vector<int>ans;
+        if(!root) return ans;
+        queue<pair<Node*,int>>q;
+        q.push({root, 0});
+        map<int,int>mp;
+        while(!q.empty()){
+            auto front = q.front();
+            q.pop();
+            
+            Node* frontData = front.first;
+            int hd = front.second;
+            
+            if(mp.find(hd) == mp.end()){
+                mp[hd] = frontData -> data;
+            }
+            
+            if(frontData -> left){
+                q.push({frontData -> left, hd - 1});
+            }
+            
+            if(frontData -> right){
+                q.push({frontData -> right, hd + 1});
+            }
+        }
+        
+        for(auto it : mp){
+            ans.push_back(it.second);
+        }
+        return ans;
     }
 };
